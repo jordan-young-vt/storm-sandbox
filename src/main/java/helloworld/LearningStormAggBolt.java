@@ -42,7 +42,6 @@ public class LearningStormAggBolt extends BaseRichBolt {
         }
 
         countMetric.incr();
-        collector.ack(input);
         System.out.println("Total Counts: " + outputMap.toString());
     }
 
