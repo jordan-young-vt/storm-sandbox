@@ -14,6 +14,7 @@ public class LearningStormTopology {
 		builder.setSpout("LearningStormSpout", new LearningStormSpout(), 2);
 		// set the bolt class
 		builder.setBolt("LearningStormAggBolt", new LearningStormAggBolt(), 4).shuffleGrouping("LearningStormSpout");
+        builder.setBolt("LearningStormGlobalAggBolt", new LearningStormGlobalAggBolt(), 1).shuffleGrouping("LearningStormAggBolt");
 
 		Config conf = new Config();
 		conf.setDebug(true);

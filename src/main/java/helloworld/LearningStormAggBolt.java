@@ -60,7 +60,7 @@ public class LearningStormAggBolt extends BaseRichBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("msgType", "msg"));
+        declarer.declare(new Fields("site", "count"));
     }
 
     @Override
