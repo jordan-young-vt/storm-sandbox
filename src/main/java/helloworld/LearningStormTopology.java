@@ -26,7 +26,7 @@ public class LearningStormTopology {
 		cluster.submitTopology("LearningStormToplogy", conf,
 				builder.createTopology());
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(30000);
 		} catch (Exception exception) {
 			System.out.println("Thread interrupted exception : " + exception);
 		}
