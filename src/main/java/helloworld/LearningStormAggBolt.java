@@ -30,7 +30,7 @@ public class LearningStormAggBolt extends BaseRichBolt {
         //DBDriver.dbPassword = (String) map.get("dbPassword");
         topologyContext.registerMetric("total_count", countMetric, 10);
     }
-
+    @Override
     public void execute(Tuple input) {
         // Get the field "site" from input tuple.
         String test = input.getStringByField("site");
@@ -40,9 +40,8 @@ public class LearningStormAggBolt extends BaseRichBolt {
         else {
             outputMap.put(test,1);
         }
-
-        countMetric.incr();
-        collector.ack(input);
+	collector.ack(input);
+   //     countMetric.incr();
         System.out.println("Total Counts: " + outputMap.toString());
     }
 
