@@ -34,19 +34,19 @@ public class LearningStormGlobalAggBolt extends BaseRichBolt {
         // Get the field "site" from input tuple.
         String site = input.getStringByField("site");
 //        try {
-        String    count = input.getStringByField("count");
+        Integer count = input.getIntegerByField("count");
   //      }
   //      catch (Exception e) {
   //      }
-	System.out.println("Site: " + site + " Count: " + count);
-//        if (outputMap.containsKey(site)) {
-//            outputMap.put(site, outputMap.get(site) + count);
-//        }
-//        else {
-//            outputMap.put(site,count);
-//        }
+	    System.out.println("Site: " + site + " Count: " + count.toString());
+        if (outputMap.containsKey(site)) {
+            outputMap.put(site, outputMap.get(site) + count);
+        }
+        else {
+            outputMap.put(site,count);
+        }
         collector.ack(input);
-//        System.out.println("Globally Aggregated ßTotal Counts: " + outputMap.toString());
+        System.out.println("Globally Aggregated Total Counts: " + outputMap.toString());
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
