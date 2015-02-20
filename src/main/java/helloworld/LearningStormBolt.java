@@ -13,10 +13,10 @@ public class LearningStormBolt extends BaseBasicBolt{
 		// Get the field "site" from input tuple.
 		String test = input.getStringByField("site");
 		// print the value of field "site" on console.
-		System.out.println("Name of input site is : " + test);	
+		System.out.println("Name of input site is : " + test);
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		
+
 	}
 }
