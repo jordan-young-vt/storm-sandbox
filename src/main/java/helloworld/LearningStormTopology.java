@@ -13,7 +13,7 @@ public class LearningStormTopology {
 		// set the spout class
 		builder.setSpout("LearningStormSpout", new LearningStormSpout(), 2);
 		// set the bolt class
-		builder.setBolt("LearningStormBolt", new LearningStormBolt(), 4).shuffleGrouping("LearningStormSpout");
+		builder.setBolt("LearningStormAggBolt", new LearningStormBolt(), 4).shuffleGrouping("LearningStormSpout");
 
 		Config conf = new Config();
 		conf.setDebug(true);
