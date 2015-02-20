@@ -1,5 +1,7 @@
 package helloworld;
 
+import backtype.storm.Config;
+import backtype.storm.Constants;
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.BasicOutputCollector;
@@ -10,7 +12,6 @@ import backtype.storm.topology.base.BaseRichBolt;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
-import storm.starter.util.TupleHelpers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class LearningStormAggBolt extends BaseRichBolt {
     public void execute(Tuple input) {
         // Get the field "site" from input tuple.
 
-        if (TupleHelpers.isTickTuple(input)) {
+        if (isTickTuple(input)) {
             for (String key: outputMap.keySet()) {
                 collector.emit(new Values(key, outputMap.get(key)));
                 System.out.println("Total Counts: " + outputMap.toString());
@@ -61,4 +62,18 @@ public class LearningStormAggBolt extends BaseRichBolt {
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
         declarer.declare(new Fields("msgType", "msg"));
     }
+
+    @Override
+    public Map<String, Object> getComponentConfiguration() {
+        // configure how often a tick tuple will be sent to our bolt
+        Config conf = new Config();
+        conf.put(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS, 5);
+        return conf;
+    }
+
+    protected static boolean isTickTuple(Tuple tuple) {
+        return tuple.getSourceComponent().equals(Constants.SYSTEM_COMPONENT_ID)
+                && tuple.getSourceStreamId().equals(Constants.SYSTEM_TICK_STREAM_ID);
+    }
+
 }
