@@ -31,7 +31,7 @@ public class LearningStormAggBolt extends BaseRichBolt {
         //DBDriver.connectionUrl = (String) map.get("connectionURL");
         //DBDriver.dbUsername = (String) map.get("dbUsername");
         //DBDriver.dbPassword = (String) map.get("dbPassword");
-        topologyContext.registerMetric("total_count", countMetric, 10);
+        //topologyContext.registerMetric("total_count", countMetric, 10);
     }
     @Override
     public void execute(Tuple input) {
