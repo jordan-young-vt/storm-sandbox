@@ -21,6 +21,7 @@ public class LearningStormSpout extends BaseRichSpout{
         	map.put(2, "twitter");
         	map.put(3, "youtube");
         	map.put(4, "linkedin");
+            map.put(5, "quora");
     }
 	public void open(Map conf, TopologyContext context,
 			SpoutOutputCollector spoutOutputCollector) {
@@ -34,6 +35,9 @@ public class LearningStormSpout extends BaseRichSpout{
 		final Random rand = new Random();
 		// generate the random number from 0 to 4.
 		int randomNumber = rand.nextInt(5);
+        if (randomNumber==4) {
+            randomNumber += rand.nextInt(2);
+        }
 		spoutOutputCollector.emit(new Values(map.get(randomNumber)));
 
 	}
